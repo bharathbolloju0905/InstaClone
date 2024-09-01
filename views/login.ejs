@@ -1,0 +1,24 @@
+<%- include("./components/header.ejs")%>
+    <div class="h-screen w-full bg-black flex justify-center items-center text-white">
+        <div class="w-[300px] flex justify-center items-center flex-col gap-[10px]">
+            <img class="h-[70px]" src="/images/logo.png" alt="">
+
+            <form class="flex justify-center items-center flex-col gap-[10px]" action="/login" method="post">
+                <input
+                    class="block bg-gray-900  w-[380px] h-[40px] mt-[5px] rounded-md p-[10px] border-slate-600 border-[0.8px]  text-white"
+                    type="text" name="username" placeholder="username" required>
+                <input
+                    class="block bg-gray-900  w-[380px] h-[40px] mt-[5px] rounded-md p-[10px] border-slate-600 border-[0.8px]  text-white"
+                    type="password" name="password" placeholder="password" required>
+                <a href="/forgot" class="text-sky-600">forgot password?</a>
+                <button
+                    class="block w-[380px] h-[40px] mt-[5px] rounded-md  bg-sky-500  text-center cursor-pointer"
+                    type="submit">Log In</button>
+            </form>
+            <p class="mt-[20px]">Don't Have Account? <a href="/" class="text-sky-600 ">SignUp!</a></p>
+        </div>
+
+    </div>
+
+
+    <%- include("./components/footer.ejs")%>

@@ -1,0 +1,62 @@
+<%-include("./components/header.ejs") %>
+<div class="flex justify-center items-center min-h-screen bg-black text-white">
+    <div class="bg-gray-950 p-6 rounded-lg shadow-lg w-full max-w-md">
+        <div class="flex flex-col items-center mb-6">
+            <!-- Hidden Image Input -->
+            <form action="/update" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="imageInput" class="hidden" accept="image/*" />
+
+                <!-- Placeholder Div for Image Upload -->
+                <div id="imagePlaceholder" class="w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center cursor-pointer overflow-hidden">
+                    <img id="selectedImage" class="w-full h-full object-cover" src="/images/uploads/<%=user.profilePic%>" alt="Profile Picture">
+                </div>
+        </div>
+
+        <!-- Username Input -->
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-300">Username</label>
+            <input type="text" name="username" class="mt-1 block w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white" value="<%=user.username%>">
+        </div>
+
+        <!-- Full Name Input -->
+        <div class="mb-4">
+            <label for="fullname" class="block text-sm font-medium text-gray-300">Full Name</label>
+            <input type="text" name="fullname" class="mt-1 block w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white" value="<%=user.fullname%>">
+        </div>
+
+        <!-- Bio Input -->
+        <div class="mb-6">
+            <label for="bio" class="block text-sm font-medium text-gray-300">Bio</label>
+            <textarea name="bio" class="mt-1 block w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white" rows="3"><%=user.bio%></textarea>
+        </div>
+
+        <!-- Update Profile Button -->
+        <div class="flex justify-center">
+            <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Update Profile
+            </button>
+        </div>
+    </form>
+    </div>
+</div>
+
+<script>
+    // Handle the image upload interaction
+    document.getElementById("imagePlaceholder").addEventListener("click", function() {
+        document.getElementById("imageInput").click();
+    });
+
+    // Preview the selected image
+    document.getElementById("imageInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('selectedImage').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+<%-include("./components/footer.ejs") %>

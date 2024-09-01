@@ -1,0 +1,52 @@
+<%-include("./components/header.ejs") %>
+    <div class="min-h-screen bg-black flex items-center justify-center text-white">
+        <form class="w-[380px] p-4 bg-gray-800 rounded-md" action="/uploadPost" method="post" enctype="multipart/form-data">
+            <!-- Image Container -->
+            <div class="relative w-full h-[300px] bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center cursor-pointer"
+                id="imageContainer">
+                <img id="selectedImage" class="w-full h-full object-cover hidden" />
+                <svg id="uploadIcon" class="h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M12 2a5 5 0 00-5 5v1H7a2 2 0 000 4h2v6a1 1 0 001 1h4a1 1 0 001-1v-6h2a2 2 0 100-4h-1V7a5 5 0 00-5-5zm-3 7V7a3 3 0 116 0v2h3a1 1 0 110 2h-2v6H8v-6H6a1 1 0 010-2h3z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+
+            <!-- Hidden File Input -->
+            <input type="file" id="imageInput" name="postImage" class="hidden" accept="image/*" />
+
+            <!-- Caption Input -->
+            <div class="mt-4">
+                <label for="caption" class="block mb-2">Caption</label>
+                <textarea id="caption" name="caption"
+                    class="w-full p-2 bg-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="3" placeholder="Write a caption..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-4">
+                <button type="submit" class="w-full bg-blue-600 p-2 rounded-md hover:bg-blue-500">Post</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('imageContainer').addEventListener('click', function () {
+            document.getElementById('imageInput').click();
+        });
+
+        document.getElementById('imageInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('selectedImage').src = e.target.result;
+                    document.getElementById('selectedImage').classList.remove('hidden');
+                    document.getElementById('uploadIcon').classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+    </script>
+    <%-include("./components/footer.ejs") %>
