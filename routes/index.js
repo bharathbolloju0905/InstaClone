@@ -19,7 +19,7 @@ router.get('/profile', isLoggedIn, async function (req, res, next) {
   res.render("profile", { user });
 });
 router.get("/editprofile", isLoggedIn, async (req, res) => {
-  const user = await usermodel.findOne({ username: req.session.passport.user });
+  const user = await usermodel.findOne({ username: req.session.passport.user }); 
   res.render("EDitprofile", { user });
 });
 router.post("/update", isLoggedIn, upload.single("file"), async (req, res) => {
@@ -57,7 +57,7 @@ router.get("/uploadPost", isLoggedIn,(req, res) => {
   res.render("uploadpost")
 })
 router.post("/uploadPost", isLoggedIn, upload.single("postImage"), async (req, res) => {
-  const user = await usermodel.findOneAndUpdate({ username: req.session.passport.user });
+  const user = await usermodel.findOne({ username: req.session.passport.user });
   if (!req.file) {
     res.status(404).send("Please Select a Image")
   }
